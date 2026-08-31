@@ -1,0 +1,22 @@
+name: "@kalo-build/plugin-morphe-ai-context"
+displayName: "Morphe AI Context"
+description: "Generates AI context files (domain_catalog.yaml, entity_graph.json) from Morphe registry for LLM agent consumption."
+version: "1.0.0"
+
+input:
+  format: "KA:MO1:YAML1"
+  description: "Morphe YAML schema files"
+  suggestedStore:
+    name: "KA_MO_YAML"
+    type: "localFileSystem"
+    path: "./morphe"
+
+output:
+  format: "KA:AC1:YAML1"
+  description: "AI context files for LLM agents"
+  suggestedStore:
+    name: "KA_AC_YAML"
+    type: "localFileSystem"
+    path: "./ai-context"
+
+configSchema: {}

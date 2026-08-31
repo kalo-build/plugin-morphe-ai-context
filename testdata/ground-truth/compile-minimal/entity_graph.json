@@ -1,0 +1,104 @@
+{
+  "nodes": [
+    {
+      "id": "Comment",
+      "type": "model",
+      "fields": 2
+    },
+    {
+      "id": "Company",
+      "type": "model",
+      "fields": 3
+    },
+    {
+      "id": "Contact",
+      "type": "model",
+      "fields": 3
+    },
+    {
+      "id": "ContactInfo",
+      "type": "model",
+      "fields": 2
+    },
+    {
+      "id": "Person",
+      "type": "model",
+      "fields": 4
+    }
+  ],
+  "edges": [
+    {
+      "from": "Comment",
+      "to": "Commentable",
+      "type": "ForOnePoly",
+      "for": [
+        "Person",
+        "Company"
+      ]
+    },
+    {
+      "from": "Company",
+      "to": "Contact",
+      "type": "ForOne",
+      "alias": "MailingContact"
+    },
+    {
+      "from": "Company",
+      "to": "Contact",
+      "type": "ForOne",
+      "alias": "MainContact"
+    },
+    {
+      "from": "Company",
+      "to": "Comment",
+      "type": "HasManyPoly",
+      "alias": "Note",
+      "through": "Commentable"
+    },
+    {
+      "from": "Company",
+      "to": "Person",
+      "type": "HasMany"
+    },
+    {
+      "from": "ContactInfo",
+      "to": "Person",
+      "type": "ForOne"
+    },
+    {
+      "from": "ContactInfo",
+      "to": "Contact",
+      "type": "ForOne",
+      "alias": "RelatedContact"
+    },
+    {
+      "from": "Person",
+      "to": "Company",
+      "type": "ForOne"
+    },
+    {
+      "from": "Person",
+      "to": "ContactInfo",
+      "type": "HasOne"
+    },
+    {
+      "from": "Person",
+      "to": "Comment",
+      "type": "HasManyPoly",
+      "alias": "Note",
+      "through": "Commentable"
+    },
+    {
+      "from": "Person",
+      "to": "Contact",
+      "type": "ForOne",
+      "alias": "PersonalContact"
+    },
+    {
+      "from": "Person",
+      "to": "Contact",
+      "type": "ForOne",
+      "alias": "WorkContact"
+    }
+  ]
+}

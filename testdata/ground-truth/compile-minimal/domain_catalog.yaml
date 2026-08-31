@@ -1,0 +1,106 @@
+entities:
+    Comment:
+        fields:
+            ID:
+                type: AutoIncrement
+                primary: true
+                required: true
+            Text:
+                type: String
+                required: true
+        relationships:
+            - target: Commentable
+              type: ForOnePoly
+              for:
+                - Person
+                - Company
+    Company:
+        fields:
+            ID:
+                type: AutoIncrement
+                primary: true
+                required: true
+            Name:
+                type: String
+                required: true
+            TaxID:
+                type: String
+                required: true
+        relationships:
+            - target: Contact
+              type: ForOne
+              alias: MailingContact
+            - target: Contact
+              type: ForOne
+              alias: MainContact
+            - target: Comment
+              type: HasManyPoly
+              alias: Note
+              through: Commentable
+            - target: Person
+              type: HasMany
+    Contact:
+        fields:
+            Email:
+                type: String
+                required: true
+            ID:
+                type: AutoIncrement
+                primary: true
+                required: true
+            Phone:
+                type: String
+                required: true
+    ContactInfo:
+        fields:
+            Email:
+                type: String
+                required: true
+            ID:
+                type: AutoIncrement
+                primary: true
+                required: true
+        relationships:
+            - target: Person
+              type: ForOne
+            - target: Contact
+              type: ForOne
+              alias: RelatedContact
+    Person:
+        fields:
+            FirstName:
+                type: String
+                required: true
+            ID:
+                type: AutoIncrement
+                primary: true
+                required: true
+            LastName:
+                type: String
+                required: true
+            Nationality:
+                type: Nationality
+                required: true
+        relationships:
+            - target: Company
+              type: ForOne
+            - target: ContactInfo
+              type: HasOne
+            - target: Comment
+              type: HasManyPoly
+              alias: Note
+              through: Commentable
+            - target: Contact
+              type: ForOne
+              alias: PersonalContact
+            - target: Contact
+              type: ForOne
+              alias: WorkContact
+enums:
+    Nationality:
+        - DE
+        - FR
+        - US
+    UniversalNumber:
+        - Euler
+        - Pi
